@@ -9,4 +9,23 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   ComponentTitle = 'My To Do list';
+
+  filter: "all" | "active" | "done" = "all";
+
+  allItems = [
+    { description: "eat", done: false},
+    { description: "sleep", done: true},
+    { description: "code", done: false},
+    { description: "repeat", done: false}
+  ];
+
+  get items() {
+    if (this.filter === "all") {
+      return this.allItems;
+    }
+
+    return this.allItems.filter((item) => {
+      this.filter === "done" ? item.done: !item.done;
+    });
+  }
 }
